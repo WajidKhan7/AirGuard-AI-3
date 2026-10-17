@@ -1,0 +1,27 @@
+{
+  "timestamp_col": "Timestamp",
+  "pollutant_cols": [
+    "PM2.5",
+    "PM10",
+    "CO",
+    "NO2",
+    "SO2",
+    "O3"
+  ],
+  "weather_cols": [
+    "Temperature",
+    "Humidity"
+  ],
+  "feature_cols": [
+    "PM2.5",
+    "PM10",
+    "CO",
+    "NO2",
+    "SO2",
+    "O3",
+    "Temperature",
+    "Humidity"
+  ],
+  "primary_pollutant": "PM2.5",
+  "label_col": "_aqi_category"
+}

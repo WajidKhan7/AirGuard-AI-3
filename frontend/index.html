@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirGuard AI | Intelligent Air Quality Monitoring</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#06101c;
+    color:#edf7ff;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+nav{
+    height:72px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(7,18,31,.95);
+    border-bottom:1px solid #1b344c;
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.logo span{
+    color:#39e6a1;
+}
+
+.navlinks{
+    display:flex;
+    gap:10px;
+}
+
+.navlinks button{
+    border:0;
+    background:transparent;
+    color:#9eb2c5;
+    padding:11px 16px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.navlinks button:hover{
+    background:#102438;
+    color:#39e6a1;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+    max-width:1350px;
+    margin:auto;
+    padding:55px 6%;
+}
+
+.page.active{
+    display:block;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:70px 0 55px;
+}
+
+.badge{
+    display:inline-block;
+    color:#39e6a1;
+    background:#0d2d27;
+    border:1px solid #1d6553;
+    padding:9px 18px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.hero h1{
+    font-size:58px;
+    line-height:1.05;
+    margin:22px 0;
+}
+
+.hero h1 span{
+    color:#39e6a1;
+}
+
+.hero p{
+    max-width:760px;
+    margin:auto;
+    color:#91a6ba;
+    font-size:18px;
+    line-height:1.7;
+}
+
+.btn{
+    margin-top:28px;
+    padding:14px 24px;
+    border:0;
+    border-radius:10px;
+    background:#39e6a1;
+    color:#03130e;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(57,230,161,.15);
+}
+
+.btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+}
+
+/* FEATURE CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:linear-gradient(145deg,#0c1d2e,#091725);
+    border:1px solid #1d374e;
+    border-radius:18px;
+    padding:27px;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#315875;
+}
+
+.icon{
+    font-size:34px;
+}
+
+.card h3{
+    margin:14px 0 9px;
+}
+
+.card p{
+    color:#8ca1b5;
+    line-height:1.6;
+}
+
+/* HEADINGS */
+
+h2{
+    font-size:36px;
+    margin-bottom:8px;
+}
+
+.sub{
+    color:#8da3b7;
+    margin-bottom:30px;
+}
+
+/* UPLOAD */
+
+.upload{
+    padding:70px 30px;
+    text-align:center;
+    border:2px dashed #31536f;
+    border-radius:20px;
+    background:#091a2a;
+}
+
+.upload-icon{
+    font-size:55px;
+}
+
+.upload h3{
+    margin:15px 0 8px;
+}
+
+.upload input{
+    display:none;
+}
+
+.upload label{
+    display:inline-block;
+    margin-top:20px;
+    background:#17334b;
+    padding:14px 23px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.upload label:hover{
+    background:#214862;
+}
+
+.filename{
+    margin-top:17px;
+    color:#39e6a1;
+}
+
+.dataset-info{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.info-box{
+    background:#0b1d2e;
+    border:1px solid #1c354b;
+    padding:20px;
+    border-radius:14px;
+}
+
+.info-box small{
+    color:#7f94a8;
+}
+
+.info-box strong{
+    display:block;
+    font-size:25px;
+    margin-top:8px;
+}
+
+/* ANALYSIS */
+
+.panel{
+    background:#091a2a;
+    border:1px solid #1d374e;
+    border-radius:20px;
+    padding:28px;
+}
+
+.controls{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.controls input,
+.controls select{
+    background:#071522;
+    color:white;
+    border:1px solid #29465f;
+    border-radius:9px;
+    padding:13px 15px;
+}
+
+.controls .btn{
+    margin-top:0;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.metric-card{
+    background:#0b1e30;
+    border:1px solid #1d3a51;
+    border-radius:15px;
+    padding:20px;
+}
+
+.metric-card small{
+    color:#8298ac;
+}
+
+.metric{
+    font-size:28px;
+    font-weight:800;
+    margin:9px 0;
+}
+
+.green{
+    color:#39e6a1;
+}
+
+.yellow{
+    color:#ffd166;
+}
+
+.red{
+    color:#ff7070;
+}
+
+.blue{
+    color:#72b8ff;
+}
+
+/* RESULT */
+
+.result{
+    margin-top:20px;
+    background:#0d2337;
+    border:1px solid #24425a;
+    border-left:4px solid #39e6a1;
+    border-radius:12px;
+    padding:20px;
+}
+
+.result h3{
+    margin-bottom:8px;
+}
+
+/* PROGRESS */
+
+.progress{
+    width:100%;
+    height:8px;
+    margin-top:12px;
+    background:#1b3042;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:#39e6a1;
+}
+
+/* TWO COLUMNS */
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:20px;
+}
+
+/* BAR CHART */
+
+.chart{
+    height:240px;
+    display:flex;
+    align-items:end;
+    gap:13px;
+    padding-top:20px;
+}
+
+.chart-bar{
+    flex:1;
+    background:#39e6a1;
+    opacity:.75;
+    border-radius:7px 7px 0 0;
+    position:relative;
+    min-height:20px;
+}
+
+.chart-bar:hover{
+    opacity:1;
+}
+
+.chart-bar span{
+    position:absolute;
+    top:-24px;
+    width:100%;
+    text-align:center;
+    font-size:11px;
+    color:#b4c7d8;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:18px;
+}
+
+th,
+td{
+    padding:13px;
+    text-align:left;
+    border-bottom:1px solid #1c354b;
+}
+
+th{
+    color:#7e94a8;
+    font-size:13px;
+}
+
+/* FORECAST */
+
+.forecast{
+    display:flex;
+    align-items:end;
+    gap:12px;
+    height:220px;
+    padding-top:30px;
+}
+
+.forecast-day{
+    flex:1;
+    text-align:center;
+    color:#8399ad;
+}
+
+.forecast-column{
+    background:#39e6a1;
+    border-radius:7px 7px 0 0;
+    opacity:.8;
+}
+
+.forecast-day strong{
+    display:block;
+    margin-top:8px;
+    color:white;
+}
+
+/* ANOMALY */
+
+.anomaly-box{
+    padding:20px;
+    border-radius:14px;
+    background:#101e2c;
+    border:1px solid #293d50;
+}
+
+.anomaly-number{
+    font-size:38px;
+    font-weight:800;
+    margin:8px 0;
+}
+
+.muted{
+    color:#8298ac;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    color:#617589;
+    padding:35px;
+    border-top:1px solid #172d41;
+    margin-top:40px;
+}
+
+/* LOADING / ERROR */
+
+.spinner{
+    width:18px;
+    height:18px;
+    border:2px solid #1d374e;
+    border-top-color:#39e6a1;
+    border-radius:50%;
+    display:inline-block;
+    animation:spin .7s linear infinite;
+    margin-right:8px;
+    vertical-align:middle;
+}
+
+@keyframes spin{
+    to{ transform:rotate(360deg); }
+}
+
+.error-text{
+    color:#ff7070;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dataset-info{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .two-column{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:39px;
+    }
+
+    .dashboard,
+    .dataset-info{
+        grid-template-columns:1fr;
+    }
+
+    .navlinks{
+        gap:2px;
+    }
+
+    .navlinks button{
+        padding:8px;
+        font-size:11px;
+    }
+
+    .page{
+        padding:35px 5%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="logo">
+AirGuard <span>AI</span>
+</div>
+
+<div class="navlinks">
+
+<button onclick="showPage('home')">
+About
+</button>
+
+<button onclick="showPage('upload')">
+Dataset
+</button>
+
+<button onclick="showPage('analysis')">
+Analysis
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- ========================= -->
+<!-- PAGE 1 -->
+<!-- ========================= -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<div class="badge">
+AI POWERED AIR QUALITY MONITORING
+</div>
+
+<h1>
+Monitor Your Air.<br>
+<span>Predict The Future.</span>
+</h1>
+
+<p>
+
+AirGuard AI combines Machine Learning,
+Anomaly Detection and a time-series forecaster
+to transform environmental sensor data into
+meaningful air-quality insights.
+
+</p>
+
+<button class="btn"
+onclick="showPage('upload')">
+
+Launch AirGuard AI →
+
+</button>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="icon">
+🧠
+</div>
+
+<h3>
+Random Forest Classification
+</h3>
+
+<p>
+
+Classifies air quality into
+Low, Moderate or High pollution
+using environmental sensor parameters.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+⚠️
+</div>
+
+<h3>
+Isolation Forest
+</h3>
+
+<p>
+
+Detects unusual environmental
+measurements and identifies
+possible pollution anomalies.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+📈
+</div>
+
+<h3>
+Time-Series Forecasting
+</h3>
+
+<p>
+
+Analyzes historical time-series
+data and predicts future
+air-quality trends.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- PAGE 2 -->
+<!-- ========================= -->
+
+<section id="upload" class="page">
+
+<h2>
+Dataset Upload
+</h2>
+
+<p class="sub">
+
+Upload the CSV dataset that contains
+your air-quality measurements. Any column
+naming works — PM2.5, PM10, NO₂, CO, SO₂,
+O₃ and similar are detected automatically.
+
+</p>
+
+
+<div class="upload">
+
+<div class="upload-icon">
+📊
+</div>
+
+<h3>
+Upload Air Quality CSV
+</h3>
+
+<p class="sub">
+
+Recommended columns:
+
+Date, Time, PM2.5, PM10,
+NO₂, CO, SO₂ and O₃
+
+</p>
+
+
+<label for="csv">
+Choose CSV Dataset
+</label>
+
+<input
+id="csv"
+type="file"
+accept=".csv"
+onchange="loadFile(this)"
+>
+
+
+<div id="filename"
+class="filename">
+
+No dataset selected
+
+</div>
+
+</div>
+
+
+<div id="datasetInfo"
+class="dataset-info">
+
+<div class="info-box">
+
+<small>
+Rows
+</small>
+
+<strong id="rows">
+-
+</strong>
+
+</div>
+
+
+<div class="info-box">
+
+<small>
+Columns
+</small>
+
+<strong id="columns">
+-
+</strong>
+
+</div>
+
+
+<div class="info-box">
+
+<small>
+Date Range
+</small>
+
+<strong id="dateRange" style="font-size:16px">
+-
+</strong>
+
+</div>
+
+
+<div class="info-box">
+
+<small>
+Status
+</small>
+
+<strong id="datasetStatus" class="muted">
+Awaiting file
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="result">
+
+<h3>
+Next Step
+</h3>
+
+<p class="sub">
+
+After uploading your dataset,
+go to Analysis and select the
+date you want the AI model to analyze.
+
+</p>
+
+<button
+class="btn"
+onclick="showPage('analysis')">
+
+Open Analysis →
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- PAGE 3 -->
+<!-- ========================= -->
+
+<section id="analysis" class="page">
+
+<h2>
+AI Analysis Dashboard
+</h2>
+
+<p class="sub">
+
+Select a date and run the complete
+AI pipeline on your uploaded dataset.
+
+</p>
+
+
+<div class="panel">
+
+
+<div class="controls">
+
+<input
+type="date"
+id="date"
+value="2024-01-15"
+>
+
+<select id="area">
+
+<option>
+Urban
+</option>
+
+<option>
+Industrial
+</option>
+
+<option>
+Commercial
+</option>
+
+<option>
+Rural
+</option>
+
+</select>
+
+
+<button
+class="btn"
+id="analyzeBtn"
+onclick="analyze()">
+
+Run AI Analysis
+
+</button>
+
+</div>
+
+
+<div id="output">
+
+<div class="result">
+
+<h3>
+Waiting for Analysis
+</h3>
+
+<p class="sub">
+
+Upload a dataset, select a date,
+and click "Run AI Analysis".
+If no dataset is uploaded yet, the
+bundled sample dataset is used instead.
+
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<div class="footer">
+
+AirGuard AI
+
+<br>
+
+Random Forest • Isolation Forest • Time-Series Forecasting
+
+</div>
+
+
+
+<script>
+
+
+let uploadedFile = null;
+
+
+/* PAGE NAVIGATION */
+
+function showPage(id){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page => {
+
+        page.classList.remove("active");
+
+    });
+
+
+    document
+    .getElementById(id)
+    .classList.add("active");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* CSV UPLOAD (client-side preview only — the real parsing/detection
+   happens on the backend when analysis actually runs) */
+
+function loadFile(input){
+
+    if(!input.files.length){
+        return;
+    }
+
+    uploadedFile = input.files[0];
+
+    document
+    .getElementById("filename")
+    .textContent =
+    "✓ " + uploadedFile.name;
+
+    document
+    .getElementById("datasetStatus")
+    .textContent = "Ready — not yet analyzed";
+
+    document
+    .getElementById("datasetStatus")
+    .className = "green";
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload = function(e){
+
+        const text =
+        e.target.result;
+
+
+        const lines =
+        text.trim().split(/\r?\n/);
+
+
+        if(lines.length > 0){
+
+            const headers =
+            lines[0].split(",").map(h => h.trim());
+
+
+            document
+            .getElementById("rows")
+            .textContent =
+            Math.max(lines.length - 1, 0);
+
+
+            document
+            .getElementById("columns")
+            .textContent =
+            headers.length;
+
+
+            document
+            .getElementById("dateRange")
+            .textContent =
+            guessDateRange(lines, headers);
+
+        }
+
+    };
+
+
+    reader.readAsText(uploadedFile);
+
+}
+
+
+/* Best-effort client-side date range preview. The backend does the
+   authoritative detection — this is just so the upload page isn't blank. */
+
+function guessDateRange(lines, headers){
+
+    const dateColIdx = headers.findIndex(h =>
+        /date|time|timestamp/i.test(h)
+    );
+
+    if(dateColIdx === -1){
+        return "No timestamp column";
+    }
+
+    let minDate = null;
+    let maxDate = null;
+
+    for(let i = 1; i < Math.min(lines.length, 5000); i++){
+
+        const cell = lines[i].split(",")[dateColIdx];
+        const d = new Date(cell);
+
+        if(isNaN(d)) continue;
+
+        if(!minDate || d < minDate) minDate = d;
+        if(!maxDate || d > maxDate) maxDate = d;
+
+    }
+
+    if(!minDate || !maxDate){
+        return "Unrecognized format";
+    }
+
+    return minDate.toISOString().slice(0,10) +
+        " → " + maxDate.toISOString().slice(0,10);
+
+}
+
+
+/* AI ANALYSIS — calls the real backend */
+
+async function analyze(){
+
+    const date =
+    document.getElementById("date").value;
+
+    const area =
+    document.getElementById("area").value;
+
+    const btn =
+    document.getElementById("analyzeBtn");
+
+
+    if(!date){
+
+        alert("Please select a date.");
+
+        return;
+
+    }
+
+
+    btn.disabled = true;
+
+
+    document
+    .getElementById("output")
+    .innerHTML = `
+
+<div class="result">
+
+<h3><span class="spinner"></span>Running AI Pipeline...</h3>
+
+<p class="sub">
+
+Preprocessing → Random Forest → Isolation Forest → Forecaster
+
+</p>
+
+</div>
+
+`;
+
+
+    const formData = new FormData();
+
+    if(uploadedFile){
+        formData.append("file", uploadedFile);
+    }
+
+    formData.append("date", date);
+    formData.append("area", area);
+    formData.append("forecast_steps", 7);
+
+
+    try{
+
+        const res = await fetch("/api/analyze", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if(!res.ok || data.error){
+            showError(data.error || "Analysis failed.");
+            return;
+        }
+
+        showResults(data);
+
+        document
+        .getElementById("datasetStatus")
+        .textContent = "Analyzed";
+
+    } catch(err){
+
+        showError("Could not reach the backend. Is api.py running?");
+
+    } finally{
+
+        btn.disabled = false;
+
+    }
+
+}
+
+
+function showError(message){
+
+    document
+    .getElementById("output")
+    .innerHTML = `
+
+<div class="result" style="border-left-color:#ff7070">
+
+<h3 class="error-text">
+Analysis Failed
+</h3>
+
+<p class="sub">
+${message}
+</p>
+
+</div>
+
+`;
+
+}
+
+
+/* Map a category string to a CSS color class */
+
+function categoryClass(category){
+
+    if(category === "Low") return "green";
+    if(category === "Moderate") return "yellow";
+    return "red";
+
+}
+
+function sensorStatusClass(status){
+
+    if(status === "Normal") return "green";
+    if(status === "Elevated") return "yellow";
+    if(status === "High") return "red";
+    return "blue";
+
+}
+
+
+/* RESULTS — built entirely from the /api/analyze response */
+
+function showResults(data){
+
+    const cls = data.classification;
+    const anom = data.anomaly;
+    const sensors = data.sensors;
+    const forecast = data.forecast;
+    const primary = data.primary_pollutant;
+
+    const clsClass = categoryClass(cls.category);
+    const anomClass = anom.status === "Normal" ? "green" : "red";
+
+    const sensorEntries = Object.entries(sensors);
+    const pollutantEntries = sensorEntries.filter(([,v]) => v.status !== null);
+    const primaryEntry = sensors[primary] || (pollutantEntries[0] ? pollutantEntries[0][1] : {value:"-"});
+
+    const maxVal = Math.max(...pollutantEntries.map(([,v]) => v.value), 1);
+
+
+    /* --- sensor bar chart --- */
+
+    const chartBars = pollutantEntries.map(([name, v]) => `
+<div class="chart-bar" style="height:${Math.max((v.value / maxVal) * 100, 6)}%">
+<span>${v.value}</span>
+</div>
+`).join("");
+
+    const chartLabels = pollutantEntries.map(([name]) => `<span>${name}</span>`).join("");
+
+
+    /* --- sensor table --- */
+
+    const sensorRows = sensorEntries.map(([name, v]) => `
+<tr>
+<td>${name}</td>
+<td>${v.value}</td>
+<td class="${v.status ? sensorStatusClass(v.status) : ''}">${v.status ?? "—"}</td>
+</tr>
+`).join("");
+
+
+    /* --- forecast bars + table --- */
+
+    const fcKey = forecast.length ? Object.keys(forecast[0]).find(k => k !== "step") : null;
+    const fcValues = forecast.map(r => r[fcKey]);
+    const fcMax = Math.max(...fcValues, 1);
+    const fcMin = Math.min(...fcValues, 0);
+    const fcRange = (fcMax - fcMin) || 1;
+
+    const forecastBars = forecast.map(r => {
+        const height = 40 + ((r[fcKey] - fcMin) / fcRange) * 130;
+        return `
+<div class="forecast-day">
+<div class="forecast-column" style="height:${height}px"></div>
+<strong>+${r.step}</strong>
+</div>
+`;
+    }).join("");
+
+    const forecastRows = forecast.map(r => `
+<tr>
+<td>+${r.step}</td>
+<td>${r[fcKey]}</td>
+</tr>
+`).join("");
+
+    const forecastNote = forecast.length === 0
+        ? `<p class="sub">Not enough historical rows to forecast yet — need at least a dozen consecutive readings.</p>`
+        : "";
+
+    const trendDirection = forecast.length > 1
+        ? (fcValues[fcValues.length - 1] > fcValues[0] ? "an increase" : "a decrease")
+        : "no clear trend yet";
+
+
+    document
+    .getElementById("output")
+    .innerHTML = `
+
+
+<!-- MAIN METRICS -->
+
+<div class="dashboard">
+
+
+<div class="metric-card">
+
+<small>
+Air Quality Classification
+</small>
+
+<div class="metric ${clsClass}">
+${cls.category.toUpperCase()}
+</div>
+
+<small>
+Random Forest
+</small>
+
+<div class="progress">
+<span style="width:${(cls.confidence * 100).toFixed(0)}%"></span>
+</div>
+
+<small>
+Confidence: ${(cls.confidence * 100).toFixed(1)}%
+</small>
+
+</div>
+
+
+
+<div class="metric-card">
+
+<small>
+Anomaly Detection
+</small>
+
+<div class="metric ${anomClass}">
+${anom.status.toUpperCase()}
+</div>
+
+<small>
+Isolation Forest
+</small>
+
+<div class="metric">
+${anom.score.toFixed(2)}
+</div>
+
+</div>
+
+
+
+<div class="metric-card">
+
+<small>
+${primary}
+</small>
+
+<div class="metric">
+${primaryEntry.value}
+</div>
+
+<small>
+detected primary pollutant
+</small>
+
+</div>
+
+
+
+<div class="metric-card">
+
+<small>
+Monitoring Area
+</small>
+
+<div class="metric blue">
+${data.area ?? "-"}
+</div>
+
+<small>
+${data.matched_date ? "Date: " + data.matched_date : "Latest available reading"}
+</small>
+
+</div>
+
+
+</div>
+
+
+
+<!-- CLASSIFICATION -->
+
+<div class="result">
+
+<h3>
+Classification Result
+</h3>
+
+<p class="sub">
+
+Date: ${data.matched_date ?? "n/a"}
+
+<br>
+
+Area Type: ${data.area ?? "n/a"}
+
+${data.date_range ? `<br>Dataset covers: ${data.date_range.start} → ${data.date_range.end}` : ""}
+
+</p>
+
+<p>
+
+The Random Forest model classifies
+the selected air-quality data as
+
+<strong class="${clsClass}">
+${cls.category}
+</strong>
+
+with ${(cls.confidence * 100).toFixed(1)}% confidence.
+
+</p>
+
+</div>
+
+
+
+<!-- TWO COLUMNS -->
+
+<div class="two-column">
+
+
+<!-- SENSOR CHART -->
+
+<div class="card">
+
+<h3>
+Environmental Parameters
+</h3>
+
+<p class="sub">
+Current sensor readings
+</p>
+
+
+<div class="chart">
+${chartBars}
+</div>
+
+
+<div style="
+display:flex;
+justify-content:space-around;
+color:#7f94a8;
+font-size:12px;
+">
+${chartLabels}
+</div>
+
+</div>
+
+
+
+<!-- ANOMALY -->
+
+<div class="card">
+
+<h3>
+Anomaly Detection
+</h3>
+
+<p class="sub">
+Isolation Forest analysis
+</p>
+
+
+<div class="anomaly-box">
+
+<small class="muted">
+Status
+</small>
+
+<div class="anomaly-number ${anomClass}">
+${anom.status.toUpperCase()}
+</div>
+
+<p class="muted">
+${anom.status === "Normal"
+    ? "No significant abnormal sensor behavior detected."
+    : "Sensor readings for this date deviate from the dataset's normal pattern."}
+</p>
+
+</div>
+
+
+<div class="anomaly-box"
+style="margin-top:15px">
+
+<small class="muted">
+Anomaly Score
+</small>
+
+<div class="anomaly-number">
+${anom.score.toFixed(2)}
+</div>
+
+<div class="progress">
+<span style="width:${Math.min(Math.max((anom.score + 0.5) * 100, 4), 100)}%"></span>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- SENSOR TABLE -->
+
+<div class="card"
+style="margin-top:20px">
+
+<h3>
+Sensor Data
+</h3>
+
+<table>
+
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Status</th>
+</tr>
+
+${sensorRows}
+
+</table>
+
+</div>
+
+
+
+<!-- FORECAST -->
+
+<div class="card"
+style="margin-top:20px">
+
+<h3>
+📈 Forecast
+</h3>
+
+<p class="sub">
+
+Predicted ${primary} values for the
+next ${forecast.length} time steps from the selected date.
+
+</p>
+
+${forecastNote}
+
+<div class="forecast">
+${forecastBars}
+</div>
+
+
+${forecast.length ? `
+<table>
+
+<tr>
+<th>Time Step</th>
+<th>Predicted ${primary}</th>
+</tr>
+
+${forecastRows}
+
+</table>
+` : ""}
+
+</div>
+
+
+
+<!-- FINAL STATUS -->
+
+<div class="result">
+
+<h3>
+AI Recommendation
+</h3>
+
+<p style="color:#9eb2c5;line-height:1.7">
+
+Air quality on the selected date is currently classified as
+<strong class="${clsClass}">${cls.category}</strong>.
+The anomaly detector reports
+<strong class="${anomClass}">${anom.status.toLowerCase()}</strong> behavior${forecast.length > 1 ? `,
+while the forecast indicates ${trendDirection} in ${primary} over the next ${forecast.length} steps.` : "."}
+
+For a real deployment, keep feeding fresh sensor readings into the
+pipeline and re-run analysis as new data arrives.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "schema": {
+    "timestamp_col": "Timestamp",
+    "pollutant_cols": [
+      "PM2.5",
+      "PM10",
+      "CO",
+      "NO2",
+      "SO2",
+      "O3"
+    ],
+    "weather_cols": [
+      "Temperature",
+      "Humidity"
+    ],
+    "feature_cols": [
+      "PM2.5",
+      "PM10",
+      "CO",
+      "NO2",
+      "SO2",
+      "O3",
+      "Temperature",
+      "Humidity"
+    ],
+    "primary_pollutant": "PM2.5",
+    "label_col": "_aqi_category"
+  },
+  "classifier": {
+    "accuracy": 0.9975,
+    "classes": [
+      "High",
+      "Low",
+      "Moderate"
+    ]
+  },
+  "anomaly": {
+    "n_samples": 2000,
+    "n_anomalies": 40,
+    "anomaly_rate": 0.02
+  },
+  "forecaster": {
+    "backend": "sklearn_mlp",
+    "lookback": 12,
+    "target_col": "PM2.5",
+    "test_mae_original_units": 11.892
+  },
+  "rows_trained_on": 2000
+}
