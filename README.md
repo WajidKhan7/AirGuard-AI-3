@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Air Quality Pipeline
 
 Implements the architecture you sketched:
@@ -71,3 +72,7 @@ python3 train_models.py path/to/your_air_quality.csv
 ```
 
 Or just upload it through the dashboard's "Train on this file" button.
+=======
+# AirGuard-AI-3
+A Python-based machine learning application for air quality classification, anomaly detection, and pollutant forecasting. Features automated data preprocessing, model training, performance evaluation, and an interactive Tkinter desktop dashboard for air quality analysis.
+>>>>>>> 0644849839d513c41fd1a19983097b944f6a5976
